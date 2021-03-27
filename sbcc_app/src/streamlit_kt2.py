@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import plotly
+# import numpy as np
+# import plotly
 # \TrackerCode\src>streamlit run streamlit_kt2.py
 st.title('SBCC Kattis Data')
 st.header("This pulls data from open.kattis, specifically the top 50 rank data for the Santa Barbara City College students.")
