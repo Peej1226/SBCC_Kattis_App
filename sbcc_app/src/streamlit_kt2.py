@@ -11,7 +11,7 @@ st.markdown("Produced by Patrick J Maher: github.com/Peej1226/")
 analysis_type = st.sidebar.radio("Analyze Rank or Score", ['Rank', 'Score'], 0)
 
 
-urlbase = 'https://raw.githubusercontent.com/Peej1226/KattisTracker/master/TrackerCode/'
+urlbase = 'https://raw.githubusercontent.com/Peej1226/SBCC_Kattis_App/master/sbcc_app/'
 load_file = 'Rank_Data.csv' if analysis_type == 'Rank' else 'Score_Data.csv'
 
 
