@@ -22,7 +22,8 @@ else:
     uploaded_file = st.sidebar.file_uploader("Upload a file")
 
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)  # The dataframes are small enough we can probably just load both
+    # The dataframes are small enough we can probably just load both
+    df = pd.read_csv(uploaded_file, index_col='Date', parse_dates=True)
     st.sidebar.info('File successfully uploaded')
     if analysis_type == 'Rank with error':
         for col_name, item in df.iteritems():
@@ -49,3 +50,8 @@ if uploaded_file is not None:
         #TODO if rank is chosen I should invert the Y - axis
         df2 = df[columns_sel]
         st.line_chart(df2)
+        df3 = df1.resample('W').mean().round()
+        st.header("Rounded by week")
+        st.write(df3)
+        st.line_chart(df3)
+
