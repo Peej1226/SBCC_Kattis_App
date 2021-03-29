@@ -10,6 +10,10 @@ rank_Data_filename = os.path.join(cwdParent, 'Rank_Data.csv')
 score_Data_filename = os.path.join(cwdParent, 'Score_Data.csv')
 
 rankDF = pd.read_csv(rank_Data_filename, index_col='Date', parse_dates=True)
+for col_name, item in rankDF.iteritems():
+    rankDF[col_name] = rankDF[col_name].astype('Int64')
+        # rankDF[col_name] = rankDF[col_name].astype('Int64')
+
 scoreDF = pd.read_csv(score_Data_filename, index_col='Date', parse_dates=True)
 
 # https://towardsdatascience.com/pretty-displaying-tricks-for-columnar-data-in-python-2fe3b3ed9b83

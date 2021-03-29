@@ -7,9 +7,7 @@ st.title('SBCC Kattis Data')
 st.header("This pulls data from open.kattis, specifically the top 50 rank data for the Santa Barbara City College students.")
 st.markdown("Produced by Patrick J Maher: github.com/Peej1226/")
 
-
-analysis_type = st.sidebar.radio("Analyze Rank or Score", ['Rank', 'Score'], 0)
-
+analysis_type = st.sidebar.radio("Analyze Rank or Score", ['Rank', 'Score', 'Rank with error'], 0)
 
 urlbase = 'https://raw.githubusercontent.com/Peej1226/SBCC_Kattis_App/master/sbcc_app/'
 load_file = 'Rank_Data.csv' if analysis_type == 'Rank' else 'Score_Data.csv'
@@ -18,15 +16,18 @@ load_file = 'Rank_Data.csv' if analysis_type == 'Rank' else 'Score_Data.csv'
 st.sidebar.subheader('Upload a file')
 datasrc = st.sidebar.radio("Choose a Data Source", ['Default (GitHub)', 'File Upload'], 0)
 
-
-if datasrc ==  'Default (GitHub)':
+if datasrc == 'Default (GitHub)':
     uploaded_file = urlbase + load_file
 else:
     uploaded_file = st.sidebar.file_uploader("Upload a file")
 
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+    df = pd.read_csv(uploaded_file)  # The dataframes are small enough we can probably just load both
     st.sidebar.info('File successfully uploaded')
+    if analysis_type == 'Rank with error':
+        for col_name, item in df.iteritems():
+            # if item.dtypes == 'float64':
+            df[col_name] = df[col_name].astype('Int64')
 
     # TODO pull fresh data
     # TODO add progress bar for pulling data
