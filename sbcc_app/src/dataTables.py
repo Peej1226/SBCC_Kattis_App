@@ -22,11 +22,13 @@ scoreDF2 = scoreDF.resample('W').mean().round()
 pd.options.display.max_columns = None
 pd.options.display.width=None
 
+# all data
 print(rankDF)
 print(scoreDF)
 
-print(rankDF2)
-print(scoreDF2)
+# weekly averages
+# print(rankDF2)
+# print(scoreDF2)
 
 
 
