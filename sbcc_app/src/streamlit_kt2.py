@@ -36,12 +36,10 @@ if uploaded_file is not None:
 
     columns = list(df.columns)
     # TODO create default name list that is made up of top 5 + those that have increased the most since a day
-    columns_sel = st.multiselect('Select columns',columns,['Alex Kohanim', 'Jacob Lee','Trevor Dolin', 'Gina McCaffrey',
+    columns_sel = st.multiselect('Select columns',columns,['Alex Kohanim', 'Jacob Lee','Trevor Dolin',
                                                            'Cardiac Mangoes', 'Patrick J Maher', 'AO',
-                                                           'Dylan Moon',  'Jordan Ayvazian',
-                                                           'Berkelly Gonzalez', 'Monica Aguilar',
-                                                           'Qimin Tao', 'Jaden Baptista',
-                                                           'Ethan Stucky'])
+                                                           'Dylan Moon',  'Jordan Ayvazian', 'Monica Aguilar',
+                                                           'Qimin Tao', 'Jaden Baptista', 'Ethan Stucky', 'Daniel S'])
     if not columns_sel:
         st.error("Please select at least one name.")
     else:
