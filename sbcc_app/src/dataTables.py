@@ -20,7 +20,7 @@ scoreDF = pd.read_csv(score_Data_filename, index_col='Date', parse_dates=True)
 scoreDF2 = scoreDF.resample('W').mean().round()
 # https://towardsdatascience.com/pretty-displaying-tricks-for-columnar-data-in-python-2fe3b3ed9b83
 pd.options.display.max_columns = None
-pd.options.display.width=None
+pd.options.display.width = None
 
 # all data
 print(rankDF)
