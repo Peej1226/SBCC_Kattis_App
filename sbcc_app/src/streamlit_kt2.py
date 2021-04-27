@@ -1,8 +1,21 @@
 import streamlit as st
 import pandas as pd
+
 # import numpy as np
 # import plotly
 # \TrackerCode\src>streamlit run streamlit_kt2.py
+
+def getTopFive(dfGTF, choice):
+    fillNumb = 51 if choice == "Rank" else 0
+    dfGTF = dfGTF.iloc[[0, -1]].fillna(fillNumb)
+    diffTopBottom_list = [round(x, 1) for x in dfGTF.diff().values.tolist()[1]]
+    diffsSubDF = pd.Series(diffTopBottom_list, index=list(dfGTF.columns))
+    if choice == "Rank":
+        top5Change = list(diffsSubDF.nsmallest().keys())
+    else:
+        top5Change = list(diffsSubDF.nlargest().keys())
+    return top5Change
+
 st.title('SBCC Kattis Data')
 st.header("This pulls data from open.kattis, specifically the top 50 rank data for the Santa Barbara City College students.")
 st.markdown("Produced by Patrick J Maher: github.com/Peej1226/")
@@ -36,10 +49,20 @@ if uploaded_file is not None:
 
     columns = list(df.columns)
     # TODO create default name list that is made up of top 5 + those that have increased the most since a day
-    columns_sel = st.multiselect('Select columns',columns,['Alex Kohanim', 'Jacob Lee', 'Gina McCaffrey', 'Trevor Dolin',
+    default_choice_type = st.radio("Which Defaults", ['Key Members', 'Big Movers'], 0)
+    topFiveList = getTopFive(df, analysis_type)
+    key_members = ['Alex Kohanim', 'Jacob Lee', 'Gina McCaffrey', 'Trevor Dolin',
                                                            'Cardiac Mangoes', 'Patrick J Maher', 'AO',
                                                            'Dylan Moon',  'Jordan Ayvazian', 'Monica Aguilar',
-                                                           'Qimin Tao', 'Jaden Baptista', 'Ethan Stucky', 'Daniel S'])
+                                                           'Qimin Tao', 'Jaden Baptista', 'Ethan Stucky', 'Daniel S']
+
+    default_picker = {
+        'Key Members': key_members,
+        'Big Movers' : topFiveList
+    }
+    default_columns_displayed = default_picker[default_choice_type]
+    columns_sel = st.multiselect('Select columns', columns, default_columns_displayed)
+
     if not columns_sel:
         st.error("Please select at least one name.")
     else:
