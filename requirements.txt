@@ -16,7 +16,6 @@ pytz~=2021.1
 toml~=0.10.2
 astor~=0.8.1
 smmap~=3.0.5
-pywin32~=300
 setuptools~=54.2.0
 scipy~=1.6.2
 matplotlib~=3.3.4
