@@ -28,16 +28,16 @@ pd.options.display.max_columns = None
 pd.options.display.width = None
 
 # all data
-# print(rankDF)
-# print(scoreDF)
+print(rankDF)
+print(scoreDF)
 
 # weekly averages
 # print(rankDF2)
 # print(scoreDF2)
 
 # top and bottom
-print(rankDF3)
-print(scoreDF3)
+# print(rankDF3)
+# print(scoreDF3)
 
 def getTopFive(df, choice):
     diffTopBottom_list = [round(x, 1) for x in df.diff().values.tolist()[1]]
@@ -48,16 +48,9 @@ def getTopFive(df, choice):
         top5Change = list(diffsSubDF.nlargest().keys())
     return top5Change
 
-
-# diffTopBottom_scoreDF3 = [round(x, 1) for x in scoreDF3.diff().values.tolist()[1]]
-# scoreSubDF = pd.Series(diffTopBottom_scoreDF3, index = list(scoreDF3.columns))
 top5scoreChange = getTopFive(scoreDF3, "Score")
-# top5scoreChange = list(scoreSubDF.nlargest().keys())
-
-# diffTopBottom_rankDF3 = [round(x, 1) for x in rankDF3.diff().values.tolist()[1]]
-# rankSubDF = pd.Series(diffTopBottom_rankDF3, index = list(rankDF3.columns))
 top5rankChange = getTopFive(rankDF3, "Rank")
-# top5rankChange = list(rankSubDF.nsmallest().keys())
+
 
 
 
@@ -65,6 +58,8 @@ top5rankChange = getTopFive(rankDF3, "Rank")
 # print()
 # print(list(scoreDF3.columns))
 # print([round(x, 1) for x in scoreDF3.diff().values.tolist()[1]])
-print()
+
+print(rankDF.max().max())
 print(top5scoreChange)
 print(top5rankChange)
+
