@@ -41,9 +41,9 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file, index_col='Date', parse_dates=True)
     st.sidebar.info('File successfully uploaded')
 
-    df['date'] = pd.to_datetime(df['date'])
-
-    df = df.style.format({'date': lambda x: "{}".format(x.strftime('%m/%d/%Y %H:%M:%S'))}).set_table_styles('styles')
+    # TODO this date processing stopped working, needs to be rebuilt, returning to default template for now.
+    # df['date'] = pd.to_datetime(df['date'])
+    # df = df.style.format({'date': lambda x: "{}".format(x.strftime('%m/%d/%Y %H:%M:%S'))}).set_table_styles('styles')
 
     if analysis_type == 'Rank with error':
         for col_name, item in df.iteritems():
@@ -100,5 +100,5 @@ if uploaded_file is not None:
         st.write(df3)
         st.line_chart(df3)
 
-        print(df)
+        # print(df)
 

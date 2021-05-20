@@ -32,8 +32,8 @@ print(rankDF)
 print(scoreDF)
 
 # weekly averages
-# print(rankDF2)
-# print(scoreDF2)
+print(rankDF2)
+print(scoreDF2)
 
 # top and bottom
 # print(rankDF3)
@@ -60,6 +60,6 @@ top5rankChange = getTopFive(rankDF3, "Rank")
 # print([round(x, 1) for x in scoreDF3.diff().values.tolist()[1]])
 
 print(rankDF.max().max())
-print(top5scoreChange)
-print(top5rankChange)
+print('score ', top5scoreChange)
+print('rank ', top5rankChange)
 
