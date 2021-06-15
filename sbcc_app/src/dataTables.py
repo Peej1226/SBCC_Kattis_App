@@ -39,6 +39,7 @@ print(scoreDF2)
 # print(rankDF3)
 # print(scoreDF3)
 
+
 def getTopFive(df, choice):
     diffTopBottom_list = [round(x, 1) for x in df.diff().values.tolist()[1]]
     diffsSubDF = pd.Series(diffTopBottom_list, index=list(df.columns))
@@ -48,10 +49,9 @@ def getTopFive(df, choice):
         top5Change = list(diffsSubDF.nlargest().keys())
     return top5Change
 
+
 top5scoreChange = getTopFive(scoreDF3, "Score")
 top5rankChange = getTopFive(rankDF3, "Rank")
-
-
 
 
 # print(scoreDF3.diff().iloc[[-1]])
