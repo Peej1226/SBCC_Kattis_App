@@ -69,10 +69,11 @@ if uploaded_file is not None:
     introDefaultChooser = "Choose your default display"
     default_choice_type = st.radio(introDefaultChooser, ['Big Movers', 'Key Members', 'Everyone'], 0)
     topFiveList = getTopFive(df)
-    key_members = ['Alex Kohanim', 'Jacob Lee', 'Gina McCaffrey', 'Trevor Dolin',
-                                                           'Cardiac Mangoes', 'Patrick J Maher', 'AO',
-                                                           'Dylan Moon',  'Jordan Ayvazian', 'Monica Aguilar',
-                                                           'Qimin Tao', 'Jaden Baptista', 'Ethan Stucky', 'Daniel S']
+    key_members = [
+        'Gina McCaffrey', 'Patrick J Maher', 'AO', 'Dylan Moon', 'Jordan Ayvazian', 'Sarah Duncan',
+        'Vlad Lekhtsikau', 'Ismail Nakkar', 'TJ McGovern', 'Dillon Rooke', 'Jaden Baptista',
+        'Ethan Stucky', 'Paul Wiley', 'Daniel S', 'Hector Salinas', 'Kev Burns', 'Ian McCurry',
+        'Ricardo Arana', 'Ethan Bresk', 'Zach', 'Luca Poulos', 'Kellen Cole', 'Anto Pinjatic']
 
     default_picker = {
         'Key Members': key_members,
@@ -102,3 +103,9 @@ if uploaded_file is not None:
 
         # print(df)
 
+'''
+Change Key to these
+
+
+
+'''
