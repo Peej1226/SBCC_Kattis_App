@@ -100,10 +100,7 @@ if uploaded_file is not None:
     # TODO add progress bar for pulling data
     # st.sidebar.info('Data from today added')
 
-
-
     columns = list(df.columns)
-
 
     topFiveList = getTopFive(df)
     key_members = [
@@ -126,14 +123,12 @@ if uploaded_file is not None:
     else:
         df.set_index('Date', inplace=True)
         df1 = df[columns_sel]
-        st.write(df1.dtypes)
 
-        # st.write(df1)
         #TODO if rank is chosen I should invert the Y - axis
         # test this out
         st.line_chart(df1)
-        # df2 = df[columns_sel]
-        # st.line_chart(df2)
+
+
         if analysis_type == 'Rank':
             for col_name in df1.columns:
                 df1[col_name] = df1[col_name].astype('float')
