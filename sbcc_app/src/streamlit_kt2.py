@@ -7,8 +7,9 @@ from dateutil.relativedelta import relativedelta
 # import plotly
 # \TrackerCode\src>streamlit run streamlit_kt2.py
 
-def getTopFive(dfGTF):
-    """no idea how this works..."""
+
+def getTopFive(dfGTF, count):
+
     # get the max value to determine if we're analyzing by rank or score
     max_val = dfGTF.loc[:, dfGTF.columns != 'Date'].max().max()
     # max value will be 50 if analyzing by rank
@@ -20,9 +21,9 @@ def getTopFive(dfGTF):
     # diffsSubDF = pd.Series(diffTopBottom_list, index=list(dfGTF.columns))
     if max_val == 50:
         # top5Change = list(total_change.nsmallest(5).keys())
-        top5Change = list(total_change.nlargest(5).keys())
+        top5Change = list(total_change.nlargest(count).keys())
     else:
-        top5Change = list(total_change.nsmallest(5).keys())
+        top5Change = list(total_change.nsmallest(count).keys())
     return top5Change
 
 # ####### SIDEBAR ####### #
@@ -54,6 +55,12 @@ st.write("Everyone, will show every member by default and then you can remove th
 st.write("Regardless, you can add and remove whomever you'd like.")
 introDefaultChooser = "Choose your default display"
 default_choice_type = st.radio(introDefaultChooser, ['Big Movers', 'Key Members', 'Everyone'], 0)
+
+# max_rows = df.shape[0]
+# I dont know the max rows until the dataframe is read
+big_mover_ct = 5
+if default_choice_type == 'Big Movers':
+    big_mover_ct = st.number_input("Numb big movers", value=5)
 
 
 if datasrc == 'Default (GitHub)':
@@ -102,7 +109,7 @@ if uploaded_file is not None:
 
     columns = list(df.columns)
 
-    topFiveList = getTopFive(df)
+    topFiveList = getTopFive(df, big_mover_ct)
     key_members = [
         'Gina McCaffrey', 'Patrick J Maher', 'AO', 'Dylan Moon', 'Jordan Ayvazian', 'Sarah Duncan',
         'Vlad Lekhtsikau', 'Ismail Nakkar', 'TJ McGovern', 'Dillon Rooke', 'Jaden Baptista',
@@ -124,24 +131,14 @@ if uploaded_file is not None:
         df.set_index('Date', inplace=True)
         df1 = df[columns_sel]
 
-        #TODO if rank is chosen I should invert the Y - axis
+        # TODO if rank is chosen I should invert the Y - axis
         # test this out
         st.line_chart(df1)
 
-
         if analysis_type == 'Rank':
-            for col_name in df1.columns:
-                df1[col_name] = df1[col_name].astype('float')
+            df1 = df1.astype('float64')
         df3 = df1.resample('W').mean().round()
         st.header("Rounded by week")
         st.write(df3)
         st.line_chart(df3)
 
-        # print(df)
-
-'''
-Change Key to these
-
-
-
-'''
